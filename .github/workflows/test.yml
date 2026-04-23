@@ -4,6 +4,8 @@ jobs:
   test:
     runs-on: macos-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
       - name: Install dependencies
         run: npm install
       - name: Run tests
