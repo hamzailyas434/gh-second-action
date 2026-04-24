@@ -1,0 +1,15 @@
+name: GitHub Context
+on: [workflow_dispatch]
+jobs:
+  context:
+    runs-on: macos-latest
+    steps:
+      - name: Print GitHub Context
+        run: |
+          echo "Commit SHA: ${{ github.sha }}"
+          echo "Branch: ${{ github.ref }}"
+          echo "Pushed by: ${{ github.actor }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Event: ${{ github.event_name }}"
+          echo "Run ID: ${{ github.run_id }}"
+          echo "Workflow: ${{ github.workflow }}"
