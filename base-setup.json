@@ -1,0 +1,50 @@
+{
+  "version": "1.0",
+  "_description": "Organization-wide defaults for all CI/CD pipelines.",
+
+  "organization": {
+    "name": "Factory42",
+    "ownerTeam": "platform-team@factory42.com"
+  },
+
+  "runtime": {
+    "node": "20-lts",
+    "packageManager": "npm",
+    "commands": {
+      "install": "npm ci",
+      "build": "npm run build",
+      "test": "npm test",
+      "lint": "npm run lint"
+    }
+  },
+
+  "qualityDefaults": {
+    "lint":      { "enabled": true, "command": "npm run lint", "failOnWarning": true },
+    "unitTests": { "enabled": true, "command": "npm test", "coverageThreshold": 80 }
+  },
+
+  "stageTemplates": {
+    "dev": {
+      "trigger":  { "type": "auto", "on": "push", "branch": "main" },
+      "approvers": []
+    },
+    "staging": {
+      "trigger":   { "type": "manual" },
+      "approvers": ["@factory42/tech-leads"]
+    },
+    "prod": {
+      "trigger":   { "type": "manual", "requireReleaseTag": true },
+      "approvers": ["@factory42/release-managers"],
+      "rollback":  { "strategy": "previous-image", "autoOnHealthFail": true }
+    }
+  },
+
+  "secretsDefaults": {
+    "rotationDays": 90,
+    "allowPlainTextEnvInProd": false
+  },
+
+  "notificationsDefaults": {
+    "notifyOn": ["deploy-success", "deploy-failure", "rollback"]
+  }
+}

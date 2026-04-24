@@ -4,13 +4,16 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "test": "vitest run"
+    "test": "vitest run",
+    "lint": "eslint src"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.2.1",
     "supertest": "^6.3.3",
     "vitest": "^0.34.0"
   }

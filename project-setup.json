@@ -1,0 +1,57 @@
+{
+  "$schema": "./base-setup.json",
+  "extends": "./base-setup.json",
+  "version": "1.0",
+  "_description": "Project-specific config for gh-second-action. Inherits from base-setup.json.",
+
+  "project": {
+    "name": "gh-second-action",
+    "displayName": "GH Second Action",
+    "description": "React frontend + Express backend with GitHub Actions CI/CD pipeline.",
+    "type": "internal",
+    "criticality": "medium",
+    "owner": "hamzailyas434@gmail.com"
+  },
+
+  "services": {
+    "frontend": {
+      "path": "./",
+      "framework": "react",
+      "packageManager": "npm"
+    },
+    "backend": {
+      "path": "./backend",
+      "framework": "express",
+      "packageManager": "npm"
+    }
+  },
+
+  "stages": {
+    "dev": {
+      "enabled": true,
+      "trigger": "auto",
+      "domain": "dev.gh-second-action.local"
+    },
+    "staging": {
+      "enabled": true,
+      "trigger": "manual",
+      "domain": "staging.gh-second-action.local"
+    },
+    "prod": {
+      "enabled": true,
+      "trigger": "manual",
+      "requireReleaseTag": true,
+      "domain": "gh-second-action.local"
+    }
+  },
+
+  "secrets": {
+    "required": ["NODE_ENV"]
+  },
+
+  "overrides": {
+    "quality": {
+      "unitTests": { "coverageThreshold": 80 }
+    }
+  }
+}
